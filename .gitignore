@@ -63,6 +63,7 @@ yarn-error.log
 .metro-health-check*
 
 # local env files
+.env
 .env*.local
 
 # testing
