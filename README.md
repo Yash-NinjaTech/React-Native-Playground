@@ -77,3 +77,25 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+## Simplenight API SDK
+
+## Installation
+> yarn install
+
+## Generate SDK clients
+> yarn run cli:sdk:generate
+
+## Run Playground
+> yarn run cli:playground
+
+
+## Troubleshooting
+If you encounter any issues, please check the following:
+1. Make sure dependencies versions:
+    - "typescript": "^5",
+    - "ts-node": "^10.9.2",
+    - "@hey-api/openapi-ts": "^0.45.1",
+      - 0.46.0 breaks everything
+2. Double check api url
+3. Regenerate SDK
