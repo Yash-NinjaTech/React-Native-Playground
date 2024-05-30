@@ -88,6 +88,7 @@ To learn more about React Native, take a look at the following resources:
 
 ## Run Playground
 > yarn run cli:playground
+> yarn run cli:example:things
 
 
 ## Troubleshooting

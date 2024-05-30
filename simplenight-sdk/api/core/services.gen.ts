@@ -2,14 +2,123 @@
 
 import type { CancelablePromise } from './core/CancelablePromise';
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
-import type { ConfigWebFindOneData, ConfigWebFindOneResponse, ConfigMobileFindOneData, ConfigMobileFindOneResponse, HotelsSearchData, HotelsSearchResponse, HotelsSearchPollData, HotelsSearchPollResponse, HotelsDetailsData, HotelsDetailsResponse, HotelsSearchSuggestionsData, HotelsSearchSuggestionsResponse, FlightsSearchData, FlightsSearchResponse, FlightsSearchPollData, FlightsSearchPollResponse, FlightsDetailsData, FlightsDetailsResponse, CarsSearchData, CarsSearchResponse, CarsSearchPollData, CarsSearchPollResponse, CarsSearchSuggestionsData, CarsSearchSuggestionsResponse, CarsDetailsData, CarsDetailsResponse, ThingsSearchData, ThingsSearchResponse, ThingsSearchPollData, ThingsSearchPollResponse, ThingsSearchSuggestionsData, ThingsSearchSuggestionsResponse, ThingsDetailsData, ThingsDetailsResponse, DiningSearchData, DiningSearchResponse, DiningSearchPollData, DiningSearchPollResponse, DiningSearchSuggestionsData, DiningSearchSuggestionsResponse, DiningDetailsData, DiningDetailsResponse, ParkingSearchData, ParkingSearchResponse, ParkingSearchPollData, ParkingSearchPollResponse, ParkingSearchSuggestionsData, ParkingSearchSuggestionsResponse, ParkingDetailsData, ParkingDetailsResponse, ShowsSearchData, ShowsSearchResponse, ShowsSearchPollData, ShowsSearchPollResponse, ShowsSearchSuggestionsData, ShowsSearchSuggestionsResponse, ShowsDetailsData, ShowsDetailsResponse, TransportationSearchData, TransportationSearchResponse, TransportationSearchPollData, TransportationSearchPollResponse, TransportationSearchSuggestionsData, TransportationSearchSuggestionsResponse, TransportationDetailsData, TransportationDetailsResponse, AuthUserControllerCheckData, AuthUserControllerCheckResponse, AuthUserControllerLoginData, AuthUserControllerLoginResponse, AuthUserControllerRefreshResponse, BookingsSendTestEmailResponse, CartsFindOneData, CartsFindOneResponse } from './types.gen';
+import type { UsersMeData, UsersMeResponse, UsersDeleteMeData, UsersDeleteMeResponse, UsersCreateData, UsersCreateResponse, UsersUpdateData, UsersUpdateResponse, ConfigWebFindOneData, ConfigWebFindOneResponse, ConfigMobileFindOneData, ConfigMobileFindOneResponse, HotelsSearchData, HotelsSearchResponse, HotelsSearchPollData, HotelsSearchPollResponse, HotelsDetailsData, HotelsDetailsResponse, HotelsSearchSuggestionsData, HotelsSearchSuggestionsResponse, FlightsSearchData, FlightsSearchResponse, FlightsSearchPollData, FlightsSearchPollResponse, FlightsDetailsData, FlightsDetailsResponse, CarsSearchData, CarsSearchResponse, CarsSearchPollData, CarsSearchPollResponse, CarsSearchSuggestionsData, CarsSearchSuggestionsResponse, CarsDetailsData, CarsDetailsResponse, ThingsSearchData, ThingsSearchResponse, ThingsSearchPollData, ThingsSearchPollResponse, ThingsSearchSuggestionsData, ThingsSearchSuggestionsResponse, ThingsDetailsData, ThingsDetailsResponse, DiningSearchData, DiningSearchResponse, DiningSearchPollData, DiningSearchPollResponse, DiningSearchSuggestionsData, DiningSearchSuggestionsResponse, DiningDetailsData, DiningDetailsResponse, ParkingSearchData, ParkingSearchResponse, ParkingSearchPollData, ParkingSearchPollResponse, ParkingSearchSuggestionsData, ParkingSearchSuggestionsResponse, ParkingDetailsData, ParkingDetailsResponse, ShowsSearchData, ShowsSearchResponse, ShowsSearchPollData, ShowsSearchPollResponse, ShowsSearchSuggestionsData, ShowsSearchSuggestionsResponse, ShowsDetailsData, ShowsDetailsResponse, TransportationSearchData, TransportationSearchResponse, TransportationSearchPollData, TransportationSearchPollResponse, TransportationSearchSuggestionsData, TransportationSearchSuggestionsResponse, TransportationDetailsData, TransportationDetailsResponse, AuthUserLoginData, AuthUserLoginResponse, AuthUserRefreshTokenData, AuthUserRefreshTokenResponse, AuthUserVerifyEmailData, AuthUserVerifyEmailResponse, AuthUserResendVerificationEmailData, AuthUserResendVerificationEmailResponse, AuthUserForgotPasswordData, AuthUserForgotPasswordResponse, AuthUserConfirmResetPasswordData, AuthUserConfirmResetPasswordResponse, AuthUserLogoutData, AuthUserLogoutResponse, BookingsCreateData, BookingsCreateResponse, BookingsUserBookingsData, BookingsUserBookingsResponse, BookingsFindOneData, BookingsFindOneResponse, BookingsResumeData, BookingsResumeResponse, BookingsCancelData, BookingsCancelResponse, BookingsCancelItemData, BookingsCancelItemResponse, BookingsFindBookingData, BookingsFindBookingResponse, BookingsSendTestEmailResponse, CartsFindOneData, CartsFindOneResponse, CartsUpdateData, CartsUpdateResponse, CartsCreateData, CartsCreateResponse, CartItemsCreateData, CartItemsCreateResponse, CartItemsDeleteData, CartItemsDeleteResponse, LocationsSearchData, LocationsSearchResponse, LocationsGetByIdData, LocationsGetByIdResponse } from './types.gen';
 
-export class ConfigService {
+export class UsersService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Get Config Web
-     * No description
+     * Get me
+     * Get current user
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.authorization User Bearer JWT token
+     * @returns UsersMeResponseDto Success
+     * @throws ApiError
+     */
+    public usersMe(data: UsersMeData): CancelablePromise<UsersMeResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/v1/users/me',
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: JWT token not valid'
+            }
+        });
+    }
+    
+    /**
+     * Delete me
+     * Delete current user
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.authorization User Bearer JWT token
+     * @returns void No content
+     * @throws ApiError
+     */
+    public usersDeleteMe(data: UsersDeleteMeData): CancelablePromise<UsersDeleteMeResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/api/v1/users/me',
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: JWT token not valid'
+            }
+        });
+    }
+    
+    /**
+     * Create
+     * Create a new user
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @returns UsersCreateResponseDto Created
+     * @throws ApiError
+     */
+    public usersCreate(data: UsersCreateData): CancelablePromise<UsersCreateResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/users/create',
+            headers: {
+                'x-api-key': data.xApiKey
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
+            }
+        });
+    }
+    
+    /**
+     * Update
+     * Update user or change password if provided
+     * @param data The data for the request.
+     * @param data.userId
+     * @param data.xApiKey Tenant API token header
+     * @param data.authorization User Bearer JWT token
+     * @param data.requestBody
+     * @returns UsersUpdateResponseDto Success
+     * @throws ApiError
+     */
+    public usersUpdate(data: UsersUpdateData): CancelablePromise<UsersUpdateResponse> {
+        return this.httpRequest.request({
+            method: 'PATCH',
+            url: '/api/v1/users/{userId}',
+            path: {
+                userId: data.userId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: JWT token not valid'
+            }
+        });
+    }
+    
+}
+
+export class ConfigWebService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
+    /**
+     * Find one
+     * Gen web configuration for tenant
      * @param data The data for the request.
      * @param data.language Content language
      * @param data.tenantId Tenant Id
@@ -32,9 +141,14 @@ export class ConfigService {
         });
     }
     
+}
+
+export class ConfigMobileService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
     /**
-     * Get Config Mobile
-     * No description
+     * Find one
+     * Gen mobile configuration for tenant
      * @param data The data for the request.
      * @param data.language Content language
      * @param data.tenantId Tenant Id
@@ -165,7 +279,8 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
@@ -315,7 +430,8 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
@@ -459,7 +575,8 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
@@ -605,7 +722,8 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
@@ -749,7 +867,8 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
@@ -889,7 +1008,8 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
@@ -1023,7 +1143,8 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
@@ -1159,72 +1280,187 @@ export class ProductsService {
             },
             errors: {
                 400: 'Bad request',
-                401: 'Unauthorized: user jwt token is invalid'
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
             }
         });
     }
     
 }
 
-export class AuthUserService {
+export class AuthService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Get current user
-     * @param data The data for the request.
-     * @param data.authorization User Bearer JWT token
-     * @returns UserResponseDto Success
-     * @throws ApiError
-     */
-    public authUserControllerCheck(data: AuthUserControllerCheckData): CancelablePromise<AuthUserControllerCheckResponse> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/api/commerce/v1/auth',
-            headers: {
-                Authorization: data.authorization
-            },
-            errors: {
-                400: 'Bad request: Data validation failed',
-                401: 'Unauthorized: JWT token not valid'
-            }
-        });
-    }
-    
-    /**
-     * Login as user
+     * Login
+     * Login with email and password
      * @param data The data for the request.
      * @param data.xApiKey Tenant API token header
      * @param data.requestBody
      * @returns UserLoginResponseDto Success
      * @throws ApiError
      */
-    public authUserControllerLogin(data: AuthUserControllerLoginData): CancelablePromise<AuthUserControllerLoginResponse> {
+    public authUserLogin(data: AuthUserLoginData): CancelablePromise<AuthUserLoginResponse> {
         return this.httpRequest.request({
             method: 'POST',
-            url: '/api/commerce/v1/auth/login',
+            url: '/api/v1/auth/login',
             headers: {
                 'x-api-key': data.xApiKey
             },
             body: data.requestBody,
             mediaType: 'application/json',
             errors: {
-                401: 'Unauthorized: apiKey, email or password did not match'
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
             }
         });
     }
     
     /**
-     * Refresh user JWT tokens
+     * Refresh Token
+     * Refresh access token with refresh token
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
      * @returns UserRefreshResponseDto Success
      * @throws ApiError
      */
-    public authUserControllerRefresh(): CancelablePromise<AuthUserControllerRefreshResponse> {
+    public authUserRefreshToken(data: AuthUserRefreshTokenData): CancelablePromise<AuthUserRefreshTokenResponse> {
         return this.httpRequest.request({
             method: 'POST',
-            url: '/api/commerce/v1/auth/refresh-tokens',
+            url: '/api/v1/auth/refresh-token',
+            headers: {
+                'x-api-key': data.xApiKey
+            },
             errors: {
-                400: 'Bad request: data validation failed',
+                400: 'Bad request',
                 401: 'Unauthorized: refresh token is not valid'
+            }
+        });
+    }
+    
+    /**
+     * Verify Email
+     * Send verification email to user
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @returns UserVerifyEmailResponseDto Success
+     * @throws ApiError
+     */
+    public authUserVerifyEmail(data: AuthUserVerifyEmailData): CancelablePromise<AuthUserVerifyEmailResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/auth/verify-email',
+            headers: {
+                'x-api-key': data.xApiKey
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
+            }
+        });
+    }
+    
+    /**
+     * Resend Verification Email
+     * Resend verification email to user
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @returns UserResendVerificationEmailResponseDto Success
+     * @throws ApiError
+     */
+    public authUserResendVerificationEmail(data: AuthUserResendVerificationEmailData): CancelablePromise<AuthUserResendVerificationEmailResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/auth/resend-verification-email',
+            headers: {
+                'x-api-key': data.xApiKey
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
+            }
+        });
+    }
+    
+    /**
+     * Forgot Password
+     * Send reset password email to user
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @returns UserForgotPasswordResponseDto Success
+     * @throws ApiError
+     */
+    public authUserForgotPassword(data: AuthUserForgotPasswordData): CancelablePromise<AuthUserForgotPasswordResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/auth/forgot-password',
+            headers: {
+                'x-api-key': data.xApiKey
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
+            }
+        });
+    }
+    
+    /**
+     * Confirm Reset Password
+     * Confirm reset password
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @returns UserConfirmResetPasswordResponseDto Success
+     * @throws ApiError
+     */
+    public authUserConfirmResetPassword(data: AuthUserConfirmResetPasswordData): CancelablePromise<AuthUserConfirmResetPasswordResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/auth/confirm-reset-password',
+            headers: {
+                'x-api-key': data.xApiKey
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
+            }
+        });
+    }
+    
+    /**
+     * Logout
+     * Logout user
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.authorization User Bearer JWT token
+     * @param data.requestBody
+     * @returns UserLogoutResponseDto Success
+     * @throws ApiError
+     */
+    public authUserLogout(data: AuthUserLogoutData): CancelablePromise<AuthUserLogoutResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/auth/logout',
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: JWT token not valid'
             }
         });
     }
@@ -1235,7 +1471,232 @@ export class BookingsService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Send test email
+     * Create
+     * Create a new booking
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns BookingsCreateResponseDto Success
+     * @throws ApiError
+     */
+    public bookingsCreate(data: BookingsCreateData): CancelablePromise<BookingsCreateResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/bookings',
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * User bookings
+     * Get user bookings
+     * @param data The data for the request.
+     * @param data.currency
+     * @param data.xApiKey Tenant API token header
+     * @param data.authorization User Bearer JWT token
+     * @param data.status
+     * @param data.startDate
+     * @param data.endDate
+     * @param data.sort
+     * @param data.limit
+     * @param data.page
+     * @returns BookingsUserBookingsResponseDto Success
+     * @throws ApiError
+     */
+    public bookingsUserBookings(data: BookingsUserBookingsData): CancelablePromise<BookingsUserBookingsResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/v1/bookings/user',
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            query: {
+                currency: data.currency,
+                status: data.status,
+                start_date: data.startDate,
+                end_date: data.endDate,
+                sort: data.sort,
+                limit: data.limit,
+                page: data.page
+            },
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: JWT token not valid'
+            }
+        });
+    }
+    
+    /**
+     * Find one
+     * Get booking by id
+     * @param data The data for the request.
+     * @param data.bookingId
+     * @param data.currency Currency code.
+     * @param data.xApiKey Tenant API token header
+     * @param data.authorization User Bearer JWT token
+     * @returns BookingsFindOneResponseDto Success
+     * @throws ApiError
+     */
+    public bookingsFindOne(data: BookingsFindOneData): CancelablePromise<BookingsFindOneResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/v1/bookings/{bookingId}',
+            path: {
+                bookingId: data.bookingId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            query: {
+                currency: data.currency
+            },
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Resume
+     * Resume a booking after 3DSecure
+     * @param data The data for the request.
+     * @param data.bookingId
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns BookingsResumeResponseDto Success
+     * @throws ApiError
+     */
+    public bookingsResume(data: BookingsResumeData): CancelablePromise<BookingsResumeResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/bookings/{bookingId}/resume',
+            path: {
+                bookingId: data.bookingId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Cancel
+     * Cancel a booking
+     * @param data The data for the request.
+     * @param data.bookingId
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns BookingsCancelResponseDto Success
+     * @throws ApiError
+     */
+    public bookingsCancel(data: BookingsCancelData): CancelablePromise<BookingsCancelResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/bookings/{bookingId}/cancel',
+            path: {
+                bookingId: data.bookingId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Cancel item
+     * Cancel a booking item
+     * @param data The data for the request.
+     * @param data.bookingId
+     * @param data.bookingItemId
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns BookingsCancelItemResponseDto Success
+     * @throws ApiError
+     */
+    public bookingsCancelItem(data: BookingsCancelItemData): CancelablePromise<BookingsCancelItemResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/bookings/{bookingId}/items/{bookingItemId}/cancel',
+            path: {
+                bookingId: data.bookingId,
+                bookingItemId: data.bookingItemId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Find booking
+     * Find booking item
+     * @param data The data for the request.
+     * @param data.currency Currency code.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns BookingsFindBookingResponseDto Success
+     * @throws ApiError
+     */
+    public bookingsFindBooking(data: BookingsFindBookingData): CancelablePromise<BookingsFindBookingResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/bookings/find',
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            query: {
+                currency: data.currency
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Send test email (temp)
      * No description
      * @returns unknown Success
      * @throws ApiError
@@ -1243,7 +1704,7 @@ export class BookingsService {
     public bookingsSendTestEmail(): CancelablePromise<BookingsSendTestEmailResponse> {
         return this.httpRequest.request({
             method: 'GET',
-            url: '/api/v1/commerce/bookings/send-test-email',
+            url: '/api/v1/bookings/send-test-email',
             errors: {
                 400: 'Bad request'
             }
@@ -1252,12 +1713,12 @@ export class BookingsService {
     
 }
 
-export class CartService {
+export class CartsService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Cart - Find one
-     * No description
+     * Find one
+     * Get cart by id
      * @param data The data for the request.
      * @param data.cartId
      * @param data.currency Currency code.
@@ -1282,7 +1743,191 @@ export class CartService {
             },
             errors: {
                 400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
+            }
+        });
+    }
+    
+    /**
+     * Update
+     * Update a cart
+     * @param data The data for the request.
+     * @param data.cartId
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns CartsUpdateResponseDto Success
+     * @throws ApiError
+     */
+    public cartsUpdate(data: CartsUpdateData): CancelablePromise<CartsUpdateResponse> {
+        return this.httpRequest.request({
+            method: 'PATCH',
+            url: '/api/v1/carts/{cartId}',
+            path: {
+                cartId: data.cartId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
                 401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Create
+     * Create a new cart
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns CartsCreateResponseDto Created
+     * @throws ApiError
+     */
+    public cartsCreate(data: CartsCreateData): CancelablePromise<CartsCreateResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/carts',
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Create Item
+     * Create a new item in the cart
+     * @param data The data for the request.
+     * @param data.cartId
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns CartItemsCreateResponseDto Created
+     * @throws ApiError
+     */
+    public cartItemsCreate(data: CartItemsCreateData): CancelablePromise<CartItemsCreateResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/carts/{cartId}/items',
+            path: {
+                cartId: data.cartId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid'
+            }
+        });
+    }
+    
+    /**
+     * Delete Item
+     * Delete an item from the cart
+     * @param data The data for the request.
+     * @param data.cartId
+     * @param data.cartItemId
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.authorization User Bearer JWT token
+     * @returns CartItemsDeleteResponseDto Success
+     * @throws ApiError
+     */
+    public cartItemsDelete(data: CartItemsDeleteData): CancelablePromise<CartItemsDeleteResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/api/v1/carts/{cartId}/items/{cartItemId}',
+            path: {
+                cartId: data.cartId,
+                cartItemId: data.cartItemId
+            },
+            headers: {
+                'x-api-key': data.xApiKey,
+                Authorization: data.authorization
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: user jwt token is invalid',
+                404: ''
+            }
+        });
+    }
+    
+}
+
+export class LocationsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
+    /**
+     * Search Locations
+     * Find locations by keyword and type
+     * @param data The data for the request.
+     * @param data.xApiKey Tenant API token header
+     * @param data.requestBody
+     * @param data.language
+     * @returns LocationsSearchResponseDto Success
+     * @throws ApiError
+     */
+    public locationsSearch(data: LocationsSearchData): CancelablePromise<LocationsSearchResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/api/v1/locations/search',
+            headers: {
+                'x-api-key': data.xApiKey
+            },
+            query: {
+                language: data.language
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
+            }
+        });
+    }
+    
+    /**
+     * Get Location
+     * Find location by ID
+     * @param data The data for the request.
+     * @param data.locationId
+     * @param data.xApiKey Tenant API token header
+     * @returns LocationsGetByIdResponseDto Success
+     * @throws ApiError
+     */
+    public locationsGetById(data: LocationsGetByIdData): CancelablePromise<LocationsGetByIdResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/api/v1/locations/{locationId}',
+            path: {
+                locationId: data.locationId
+            },
+            headers: {
+                'x-api-key': data.xApiKey
+            },
+            errors: {
+                400: 'Bad request',
+                401: 'Unauthorized: no x-api-key provided'
             }
         });
     }
