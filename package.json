@@ -8,11 +8,13 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "cli:sdk:generate": "bash ./simplenight-sdk/generate-client.sh",
-    "cli:playground": "ts-node ./simplenight-sdk/playground.ts"
+    "cli:sdk:generate": "bash ./generate-client.sh",
+    "cli:playground": "ts-node ./simplenight-sdk/playground.ts",
+    "cli:example:things": "ts-node simplenight-sdk/examples/things-to-do/index.ts",
+    "cli:example:dining": "ts-node simplenight-sdk/examples/dining/index.ts"
   },
   "dependencies": {
-    "@hey-api/openapi-ts": "^0.45.1",
+    "@hey-api/openapi-ts": "^0.46.3",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
@@ -24,7 +26,9 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
     "zod": "^3.23.8",
-    "langchain": "^0.0.140"
+    "langchain": "^0.0.140",
+    "dayjs": "^1.11.11",
+    "tsconfig-paths": "4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

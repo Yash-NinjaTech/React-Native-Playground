@@ -3,21 +3,27 @@ import type { OpenAPIConfig } from './core/OpenAPI';
 import { Interceptors } from './core/OpenAPI';
 import { FetchHttpRequest } from './core/FetchHttpRequest';
 
-import { AuthUserService } from './services.gen';
+import { AuthService } from './services.gen';
 import { BookingsService } from './services.gen';
-import { CartService } from './services.gen';
-import { ConfigService } from './services.gen';
+import { CartsService } from './services.gen';
+import { ConfigMobileService } from './services.gen';
+import { ConfigWebService } from './services.gen';
+import { LocationsService } from './services.gen';
 import { ProductsService } from './services.gen';
+import { UsersService } from './services.gen';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class ApiCore {
 
-	public readonly authUser: AuthUserService;
+	public readonly auth: AuthService;
 	public readonly bookings: BookingsService;
-	public readonly cart: CartService;
-	public readonly config: ConfigService;
+	public readonly carts: CartsService;
+	public readonly configMobile: ConfigMobileService;
+	public readonly configWeb: ConfigWebService;
+	public readonly locations: LocationsService;
 	public readonly products: ProductsService;
+	public readonly users: UsersService;
 
 	public readonly request: BaseHttpRequest;
 
@@ -38,10 +44,13 @@ export class ApiCore {
       },
 		});
 
-		this.authUser = new AuthUserService(this.request);
+		this.auth = new AuthService(this.request);
 		this.bookings = new BookingsService(this.request);
-		this.cart = new CartService(this.request);
-		this.config = new ConfigService(this.request);
+		this.carts = new CartsService(this.request);
+		this.configMobile = new ConfigMobileService(this.request);
+		this.configWeb = new ConfigWebService(this.request);
+		this.locations = new LocationsService(this.request);
 		this.products = new ProductsService(this.request);
+		this.users = new UsersService(this.request);
 	}
 }
