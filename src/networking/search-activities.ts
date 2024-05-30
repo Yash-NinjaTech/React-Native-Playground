@@ -21,7 +21,7 @@ export async function searchActivitiesV4(
       },
       xApiKey,
     });
-    console.log('searchResponse>>API', searchResponse);
+    console.log('searchResponse>>API', searchResponse.results?.[0]?.index);
     // console.log('Activity details retrieved successfully:', searchResponse);
     return searchResponse;
   } catch (error: any) {

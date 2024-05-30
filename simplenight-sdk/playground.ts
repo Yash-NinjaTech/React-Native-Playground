@@ -46,12 +46,12 @@ async function main() {
   // const flightId = (await searchFlights()) ?? "";
 
   // Shows and Events Search
-  const showData = await searchShows();
-  const showId = showData?.showId;
-  const ticketId = showData?.ticketId;
-  const qty = showData?.qty;
+  // const showData = await searchShows();
+  // const showId = showData?.showId;
+  // const ticketId = showData?.ticketId;
+  // const qty = showData?.qty;
 
-  const cartId = await createCart();
+  // const cartId = await createCart();
 
   // Hotel Add To Cart
   // await addHotelToCart(cartId, hotelId, roomId);
@@ -89,27 +89,27 @@ async function thingsToDoSearch() {
 
   console.log('things to do search:', searchResponse);
 
-  const thingsId = searchResponse.results[0].id;
+  // const thingsId = searchResponse.results[0].id;
 
-  const thingsDetails = await apiCore.products.thingsDetails({
-    productId: thingsId,
-    xApiKey,
-    currency: 'USD',
-    language: 'en',
-    uom: 'mi',
-    availability: 'true',
-    availabilityAdults: '1',
-    availabilityChildren: '0',
-    availabilityDate: '2024-06-16',
-  });
+  // const thingsDetails = await apiCore.products.thingsDetails({
+  //   productId: thingsId,
+  //   xApiKey,
+  //   currency: 'USD',
+  //   language: 'en',
+  //   uom: 'mi',
+  //   availability: 'true',
+  //   availabilityAdults: '1',
+  //   availabilityChildren: '0',
+  //   availabilityDate: '2024-06-16',
+  // });
 
-  console.log('Things Details:', thingsDetails);
+  // console.log('Things Details:', thingsDetails);
 
-  console.log('booking questions:', thingsDetails.attributes.booking_questions);
+  // console.log('booking questions:', thingsDetails.attributes.booking_questions);
 
-  const variantId = thingsDetails.variants[0].id;
+  // const variantId = thingsDetails.variants[0].id;
 
-  return {thingsId, variantId};
+  // return {thingsId, variantId};
 }
 
 async function addThingsToDoToCart(
@@ -444,4 +444,57 @@ async function cartCheckout(cartId: string) {
 
   console.log('Cart Book Response:', cartBookResponse);
 }
+
+async function printThingsToDo() {
+  const searchResponse = await apiCore.products.thingsSearch({
+    requestBody: {
+      start_location: '40.7127753,-74.0059728',
+      start_date: '2024-06-16',
+      end_date: '2024-06-22',
+      adults: 1,
+      poll: false,
+      language: 'en',
+      currency: 'USD',
+      uom: 'mi',
+    },
+    xApiKey,
+  });
+
+  console.log(searchResponse);
+
+  // const firstThingId = searchResponse.results[0].id;
+
+  // const thingDetails = await apiCore.products.thingsDetails({
+  //   productId: firstThingId,
+  //   xApiKey,
+  //   currency: 'USD',
+  //   language: 'en',
+  //   uom: 'mi',
+  //   availability: 'true',
+  //   availabilityAdults: '0',
+  //   availabilityChildren: '0',
+  //   availabilityDate: '2024-06-16',
+  // });
+
+  // console.log('things details', thingDetails);
+  // console.log('Thing Details itinerary:', thingDetails.attributes.itinerary);
+
+  // polling optimization example:
+  // while (true) {
+  //   const hotels = await apiCore.products.thingsSearchPoll({
+  //     requestBody: {},
+  //     searchId: searchResponse.search.id,
+  //     xApiKey,
+  //   });
+
+  //   console.log(hotels);
+
+  //   if (hotels.search.status === "Complete") {
+  //     break;
+  //   }
+
+  //   await sleep(1000);
+  // }
+}
+
 main().catch(console.error);
