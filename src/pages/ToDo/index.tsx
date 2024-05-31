@@ -24,22 +24,7 @@ const ToDoScreen = () => {
       };
       const res = await searchActivitiesV4(payload);
       setResult(res.results);
-      // const searchResponse = await apiCore.products.thingsSearch({
-      //   requestBody: {
-      //     start_location: '40.7127753,-74.0059728',
-      //     start_date: '2024-06-16',
-      //     end_date: '2024-06-22',
-      //     adults: 1,
-      //     poll: false,
-      //     language: 'en',
-      //     currency: 'USD',
-      //     uom: 'mi',
-      //   },
-      //   xApiKey: xApiKey,
-      // });
-
       setLoading(false);
-      console.log('searchResponse>>', res);
     } catch (error) {
       setLoading(false);
       console.log('Error>>agent>>', error);
@@ -58,7 +43,7 @@ const ToDoScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.headerTitle}>Things To Search SDK call</Text>
       {loading ? (
         <ActivityIndicator />
@@ -71,7 +56,7 @@ const ToDoScreen = () => {
           onRefresh={() => fetchData()}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

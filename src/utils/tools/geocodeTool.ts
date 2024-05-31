@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 let apiKey = process.env.SN_GOOGLE_MAPS_API_KEY;
 

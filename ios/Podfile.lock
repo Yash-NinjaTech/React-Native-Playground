@@ -375,7 +375,9 @@ PODS:
   - React-jsinspector (0.72.14)
   - React-logger (0.72.14):
     - glog
-  - react-native-safe-area-context (4.10.1):
+  - react-native-date-picker (5.0.4):
+    - React-Core
+  - react-native-safe-area-context (4.10.3):
     - React-Core
   - React-NativeModulesApple (0.72.14):
     - hermes-engine
@@ -491,6 +493,9 @@ PODS:
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-RCTImage
+  - RNVectorIcons (10.1.0):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -542,6 +547,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -561,6 +567,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -623,6 +630,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-date-picker:
+    :path: "../node_modules/react-native-date-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-NativeModulesApple:
@@ -661,6 +670,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -698,7 +709,8 @@ SPEC CHECKSUMS:
   React-jsiexecutor: e9a70be9304ef2e66eeebac35710f958b076dc14
   React-jsinspector: 275d9f80210f15f0af9a4b7fd5683fab9738e28e
   React-logger: 8da4802de77a0eb62512396ad6bb1769904c2f0e
-  react-native-safe-area-context: dcab599c527c2d7de2d76507a523d20a0b83823d
+  react-native-date-picker: 6891317e850deae5b53d51355226e07a495aba61
+  react-native-safe-area-context: b01d8f42d4e62a7be5a3e69fd332e0c7e67584c7
   React-NativeModulesApple: 3107f777453f953906d9ba9dc5f8cbd91a6ef913
   React-perflogger: daabc494c6328efc1784a4b49b8b74fca305d11c
   React-RCTActionSheet: 0e0e64a7cf6c07f1de73d1f0a92d26a70262b256
@@ -717,6 +729,7 @@ SPEC CHECKSUMS:
   React-utils: 22a77b05da25ce49c744faa82e73856dcae1734e
   ReactCommon: ff94462e007c568d8cdebc32e3c97af86ec93bb5
   RNScreens: b8d370282cdeae9df85dd5eab20c88eb5181243b
+  RNVectorIcons: 32462e7c7e58fe457474fc79c4d7de3f0ef08d70
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: c32e0be1a17f8f1f0e633a3122f7666441f52c82
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
